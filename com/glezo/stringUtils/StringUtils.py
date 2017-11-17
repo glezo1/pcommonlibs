@@ -31,10 +31,15 @@ class StringUtils(object):
         hours   ,   minutes =   divmod(minutes          ,   60)        
         days    ,   hours   =   divmod(hours            ,   24)        
         years   ,   days    =   divmod(days             ,  365)
-        if(     years!=0    ):      return str(years)+'y '+str(days)+'d '+str(hours)+':'+str(minutes)+':'+str(seconds)        
-        elif(   days!=0     ):      return                 str(days)+'d '+str(hours)+':'+str(minutes)+':'+str(seconds)        
-        elif(   hours!=0    ):      return                                str(hours)+':'+str(minutes)+':'+str(seconds)        
-        elif(   minutes!=0  ):      return                                               str(minutes)+':'+str(seconds)        
-        else:                       return                                                                str(seconds)+'s'        
+        seconds             =   str(round(seconds)  ).zfill(2)
+        minutes             =   str(round(minutes)  ).zfill(2)
+        hours               =   str(round(hours)    ).zfill(2)
+        days                =   round(days)
+        years               =   round(years)
+        if(     years  !=0      ):      return years+'y '+days+'d '+hours+':'+minutes+':'+seconds+'s'
+        elif(   days   !=0      ):      return            days+'d '+hours+':'+minutes+':'+seconds+'s'
+        elif(   hours  !='00'   ):      return                      hours+':'+minutes+':'+seconds+'s'
+        elif(   minutes!='00'   ):      return                                minutes+':'+seconds+'s'
+        else:                           return                                            seconds+'s'        
     #---------------------------------------------------------------------
         
