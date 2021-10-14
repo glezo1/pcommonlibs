@@ -42,4 +42,26 @@ class StringUtils(object):
         elif(   minutes!='00'   ):      return                                minutes+':'+seconds+'s'
         else:                           return                                            seconds+'s'        
     #---------------------------------------------------------------------
+    @staticmethod
+    def str_split_all_permutations(str_input,separator='|',num_fragments_in_output=1):
+        #based on https://stackoverflow.com/questions/69555581/python-string-split-by-separator-all-possible-permutations/
+        def lst_merge(lst, positions, sep='|'):
+            #merges a list on points other than positions
+            #A, B, C, D and 0, 1 -> A, B, C|D
+            a   =   -1
+            out =   []
+            for b in list(positions)+[len(lst)-1]:
+                out.append('|'.join(lst[a+1:b+1]))
+                a   =   b
+            return out
+
+        def split_comb(s, sep='|',split=1):
+            l = s.split(sep)
+            return [lst_merge(l, pos, sep=sep)
+                    for pos in combinations(range(len(l)-1), split)]
+
+        if(num_fragments_in_output==0):
+            raise ValueError("num_fragments_in_output shall be > 0")
+        return split_comb(str_input,separator,num_fragments_in_output-1)
+    #---------------------------------------------------------------------
         
