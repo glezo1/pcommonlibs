@@ -1,5 +1,6 @@
 import string
 import datetime
+from itertools      import combinations
 
 class StringUtils(object):
     #---------------------------------------------------------------------
